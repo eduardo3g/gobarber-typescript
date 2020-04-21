@@ -30,7 +30,8 @@
       {
         "ts": "never"
       }
-    ]
+    ],
+    "array-callback-return": "off"
   },
   "settings": {
     "import/resolver": {
