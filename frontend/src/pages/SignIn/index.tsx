@@ -53,7 +53,7 @@ const SignIn: React.FC = () => {
 
         addToast({
           type: 'info',
-          title: 'Login realizado.',
+          title: 'Você está autenticado.',
         });
 
         history.push('/dashboard');
