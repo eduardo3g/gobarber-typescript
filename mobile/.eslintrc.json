@@ -30,6 +30,7 @@
     "rules": {
       "prettier/prettier": "error",
       "react-hooks/rules-of-hooks": "error",
+      "no-shadow": "off",
       "react/jsx-props-no-spreading": "off",
       "react/prop-types": "off",
       "react-hooks/exhaustive-deps": "warn",
