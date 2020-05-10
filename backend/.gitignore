@@ -3,3 +3,6 @@ node_modules
 # Ignores all the content inside 'tmp' folder, but not the folder itself.
 tmp/*
 !tmp/.gitkeep
+coverage
+.vscode
+yarn.lock
