@@ -37,7 +37,7 @@ describe('UpdateUserAvatar', () => {
       fakeStorageProvider,
     );
 
-    expect(
+    await expect(
       updateUserAvatar.execute({
         user_id: 'non-existing-user',
         avatarFilename: 'avatar.jpg',
@@ -76,7 +76,7 @@ describe('UpdateUserAvatar', () => {
     // Validate if the function deleteFile was triggered and received the paramater 'avatar.jpg'
     expect(deleteFile).toHaveBeenCalledWith('avatar.jpg');
 
-    expect(
+    await expect(
       updateUserAvatar.execute({
         user_id: 'non-existing-user',
         avatarFilename: 'avatar.jpg',
