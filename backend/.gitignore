@@ -3,6 +3,11 @@ node_modules
 # Ignores all the content inside 'tmp' folder, but not the folder itself.
 tmp/*
 !tmp/.gitkeep
+
+ormconfig.json
 coverage
-.vscode
+.vscode/
+buid/
+temp/
+.env
 yarn.lock
