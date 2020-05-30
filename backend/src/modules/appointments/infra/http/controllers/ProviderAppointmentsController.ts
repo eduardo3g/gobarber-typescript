@@ -8,7 +8,6 @@ class ProviderAppointmentsController {
     const provider_id = request.user.id;
     const { day, month, year } = request.body;
 
-    // const createAppointment = new CreateAppointmentService();
     const listProviderAppointments = container.resolve(
       ListProviderAppointmentsService,
     ); // Dependency injection
