@@ -8,7 +8,9 @@ import 'express-async-errors';
 
 import uploadConfig from '@config/upload';
 import AppError from '@shared/errors/AppError';
-import rateLimiter from './middlewares/rateLimiter';
+import redis from 'redis';
+import RateLimit from 'express-rate-limit';
+import RateLimitRedis from 'rate-limit-redis';
 import routes from './routes';
 
 import '@shared/infra/typeorm';
@@ -16,7 +18,19 @@ import '@shared/container';
 
 const app = express();
 
-app.use(rateLimiter);
+app.use(
+  RateLimit({
+    store: new RateLimitRedis({
+      client: redis.createClient({
+        host: process.env.REDIS_HOST || 'localhost',
+        port: Number(process.env.REDIS_PORT) || 6379,
+      }),
+    }),
+    windowMs: 1000 * 60 * 15,
+    max: 100,
+  }),
+);
+
 app.use(cors());
 app.use(express.json());
 app.use('/files', express.static(uploadConfig.uploadsFolder));
