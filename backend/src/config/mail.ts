@@ -14,8 +14,9 @@ export default {
 
   defaults: {
     from: {
-      email: process.env.DEFAULT_MAIL_ADDRESS,
-      name: process.env.DEFAULT_MAIL_NAME,
+      email:
+        process.env.DEFAULT_MAIL_ADDRESS || 'suporte@stepsconsultoria.com.br',
+      name: process.env.DEFAULT_MAIL_NAME || 'Eduardo da Steps Consultoria',
     },
   },
 } as IMailConfig;
