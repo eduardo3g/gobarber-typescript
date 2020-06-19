@@ -51,7 +51,7 @@ const SignUp: React.FC = () => {
         addToast({
           type: 'success',
           title: 'Cadastro realizado com sucesso.',
-          description: 'Você já pode fazer seu logon no GoBarber.',
+          description: 'Você já pode fazer seu login no GoBarber.',
         });
 
         history.push('/');
@@ -99,7 +99,7 @@ const SignUp: React.FC = () => {
 
           <Link to="/">
             <FiArrowLeft />
-            Voltar para logon
+            Voltar para login
           </Link>
         </AnimationContainer>
       </Content>
