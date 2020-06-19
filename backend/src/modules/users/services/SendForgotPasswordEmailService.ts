@@ -51,7 +51,7 @@ class SendForgotPasswordEmailService {
           name: user.name,
           link: `${
             process.env.APP_WEB_URL || 'http://localhost:3333'
-          }/reset_password?token=${token}`,
+          }/reset-password?token=${token}`,
         },
       },
     });
