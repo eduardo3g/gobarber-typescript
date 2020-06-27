@@ -73,14 +73,24 @@ const Profile: React.FC = () => {
       if (e.target.files) {
         data.append('avatar', e.target.files[0]);
 
-        api.patch('users/avatar', data).then(response => {
-          updateUser(response.data);
+        api
+          .patch('users/avatar', data)
+          .then(response => {
+            updateUser(response.data);
 
-          addToast({
-            type: 'success',
-            title: 'Avatar atualizado.',
+            addToast({
+              type: 'success',
+              title: 'Avatar atualizado.',
+            });
+          })
+          .catch(() => {
+            addToast({
+              type: 'error',
+              title: 'Falha ao atualizar o avatar.',
+              description:
+                'Algo deu errado ao atualizar o avatar, tente novamente.',
+            });
           });
-        });
       }
     },
     [addToast, updateUser],
