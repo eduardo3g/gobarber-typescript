@@ -17,10 +17,12 @@ import Button from '../../components/Button';
 import { Container, Content, AvatarInput } from './styles';
 import { useAuth } from '../../hooks/auth';
 
-interface SignUpFormData {
+interface ProfileFormData {
   name: string;
   email: string;
+  old_password: string;
   password: string;
+  password_confirmation: string;
 }
 
 const Profile: React.FC = () => {
@@ -31,7 +33,7 @@ const Profile: React.FC = () => {
   const { user, updateUser } = useAuth();
 
   const handleSubmit = useCallback(
-    async (data: SignUpFormData) => {
+    async (data: ProfileFormData) => {
       try {
         formRef.current?.setErrors({});
 
@@ -40,27 +42,69 @@ const Profile: React.FC = () => {
           email: Yup.string()
             .required('Email obrigatório.')
             .email('Digite um e-mail válido.'),
-          password: Yup.string().min(6, 'No mínimo 6 dígitos.'),
+          old_password: Yup.string(),
+          password: Yup.string().when('old_password', {
+            is: val => !!val.length,
+            then: Yup.string().required('Campo obrigatório.'),
+            otherwise: Yup.string(),
+          }),
+          password_confirmation: Yup.string()
+            .when('old_password', {
+              is: val => !!val.length,
+              then: Yup.string().required('Campo obrigatório.'),
+              otherwise: Yup.string(),
+            })
+            .oneOf([Yup.ref('password'), null], 'Confirmação incorreta'),
         });
 
         await schema.validate(data, {
           abortEarly: false,
         });
 
-        await api.post('/users', data);
+        const {
+          name,
+          email,
+          old_password,
+          password,
+          password_confirmation,
+        } = data;
+
+        const formData = {
+          name,
+          email,
+          ...(old_password
+            ? {
+                old_password,
+                password,
+                password_confirmation,
+              }
+            : {}),
+        };
+
+        const response = await api.put('/profile', formData);
+
+        updateUser(response.data);
 
         addToast({
           type: 'success',
           title: 'Perfil atualizado com sucesso.',
         });
 
-        history.push('/');
+        history.push('/dashboard');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
 
           formRef.current?.setErrors(errors);
+
+          return;
         }
+
+        addToast({
+          type: 'error',
+          title: 'Erro na atualização.',
+          description: 'Ocorreu um erro ao atualizar perfil, tente novamente.',
+        });
       }
     },
     [addToast, history],
