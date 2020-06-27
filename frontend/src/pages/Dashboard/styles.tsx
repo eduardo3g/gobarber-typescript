@@ -95,6 +95,10 @@ export const Schedule = styled.div`
       align-items: center;
     }
 
+    #weekDay {
+      text-transform: capitalize;
+    }
+
     /* Apply this style to all spans, except the first one */
     span + span::before {
       content: '';

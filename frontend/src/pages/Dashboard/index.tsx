@@ -114,9 +114,15 @@ const Dashboard: React.FC = () => {
   }, [selectedDate]);
 
   const selectedWeekDay = useMemo(() => {
-    return format(selectedDate, 'cccc', {
+    const formattedWeekDay = format(selectedDate, 'cccc', {
       locale: ptBR,
     });
+
+    if (formattedWeekDay === 'sábado' || formattedWeekDay === 'domingo') {
+      return formattedWeekDay;
+    }
+
+    return formattedWeekDay.concat('-feira');
   }, [selectedDate]);
 
   const morningAppointments = useMemo(() => {
@@ -172,7 +178,7 @@ const Dashboard: React.FC = () => {
           <p>
             {isToday(selectedDate) && <span>Hoje</span>}
             <span>{selectedDateAsText}</span>
-            <span>{selectedWeekDay}</span>
+            <span id="weekDay">{selectedWeekDay}</span>
           </p>
 
           {isToday(selectedDate) && nextAppointment && (
