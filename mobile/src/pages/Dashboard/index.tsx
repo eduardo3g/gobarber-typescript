@@ -21,6 +21,7 @@ import {
   ProviderMetaText,
   ProvidersListTitle,
 } from './styles';
+import defaultProfilePicture from '../../assets/defaultProfilePicture.png';
 
 export interface Provider {
   id: string;
@@ -61,7 +62,11 @@ const Dashboard: React.FC = () => {
         </HeaderTitle>
 
         <ProfileButton onPress={navigateToProfile}>
-          <UserAvatar source={{ uri: user.avatar_url }} />
+          <UserAvatar
+            source={
+              user.avatar_url ? { uri: user.avatar_url } : defaultProfilePicture
+            }
+          />
         </ProfileButton>
       </Header>
 
@@ -75,7 +80,13 @@ const Dashboard: React.FC = () => {
           <ProviderContainer
             onPress={() => navigateToCreateAppointment(provider.id)}
           >
-            <ProviderAvatar source={{ uri: provider.avatar_url }} />
+            <ProviderAvatar
+              source={
+                provider.avatar_url
+                  ? { uri: provider.avatar_url }
+                  : defaultProfilePicture
+              }
+            />
 
             <ProviderInfo>
               <ProviderName>{provider.name}</ProviderName>
