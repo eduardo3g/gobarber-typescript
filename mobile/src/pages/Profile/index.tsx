@@ -47,7 +47,7 @@ const Profile: React.FC = () => {
   const passwordInputRef = useRef<TextInput>(null);
   const confirmPasswordInputRef = useRef<TextInput>(null);
 
-  const handleSignUp = useCallback(
+  const handleUpdateProfile = useCallback(
     async (data: ProfileFormData) => {
       try {
         formRef.current?.setErrors({});
@@ -152,7 +152,7 @@ const Profile: React.FC = () => {
             <Form
               initialData={{ name: user.name, email: user.email }}
               ref={formRef}
-              onSubmit={handleSignUp}
+              onSubmit={handleUpdateProfile}
             >
               <Input
                 autoCapitalize="words"
