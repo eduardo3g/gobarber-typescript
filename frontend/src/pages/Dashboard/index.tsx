@@ -215,7 +215,7 @@ const Dashboard: React.FC = () => {
 
                 <div>
                   <img
-                    src={appointment.user.avatar_url}
+                    src={appointment.user.avatar_url || 'https://api.adorable.io/avatars/56/abott@adorable.png'}
                     alt={appointment.user.name}
                   />
 
@@ -240,7 +240,7 @@ const Dashboard: React.FC = () => {
 
                 <div>
                   <img
-                    src={appointment.user.avatar_url}
+                    src={appointment.user.avatar_url || 'https://api.adorable.io/avatars/56/abott@adorable.png'}
                     alt={appointment.user.name}
                   />
 
