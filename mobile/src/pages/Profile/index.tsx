@@ -21,6 +21,8 @@ import getValidationErrors from '../../utils/getValidationErrors';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
+import defaultProfilePicture from '../../assets/defaultAvatar.png';
+
 import {
   Container,
   Title,
@@ -181,7 +183,13 @@ const Profile: React.FC = () => {
             </BackButton>
 
             <UserAvatarButton onPress={handleUpdateAvatar}>
-              <UserAvatar source={{ uri: user.avatar_url }} />
+              <UserAvatar
+                source={
+                  user.avatar_url
+                    ? { uri: user.avatar_url }
+                    : defaultProfilePicture
+                }
+              />
             </UserAvatarButton>
 
             <View>
